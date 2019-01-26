@@ -8,7 +8,7 @@ const fn = async value => {
   return value + '-done'
 }
 
-for await (let value of iterp(data.values(), fn, 2) {
+for await (let value of iterp(data.values(), fn, 2)) {
   console.log(value)
 }
 ```
