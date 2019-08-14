@@ -20,6 +20,13 @@ const iterp = async function * (iter, fn, parallelism = 1) {
     const { value, done } = iter.next()
     if (!done) _run(value)
   }
+  /*
+   * Not sure if this next line is necessary, it may
+   * not be, but it's better to be cautious just in case.
+   * If we ever find a consistent reproduction we should
+   * add it to the tests.
+  */
+  // istanbul ignore next
   while (results.length) yield results.shift()
 }
 

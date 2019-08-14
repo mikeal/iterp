@@ -29,7 +29,6 @@ test('basic test', async t => {
   }
   t.same(count, 10)
   const tt = Date.now() - start
-  console.error({ tt })
   t.ok(tt < 30 && tt > 9)
   for await (const value of iterp([].values(), fn)) {
     throw new Error(`Iteration when one should not have occured. value: ${value}`)
