@@ -19,8 +19,7 @@ jobs:
       with:
         args: branch master
     - name: Publish
-      uses: actions/npm@master
+      uses: mikeal/merge-release@master
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      with:
-        args: publish --access public
