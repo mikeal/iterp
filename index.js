@@ -1,24 +1,26 @@
-const iterp = async function * (iter, fn,  parallelism=1) {
-  let running = new Set()
-  let _run = (value) => {
-    let promise = fn(value)
-    promise.then(() => {
+const iterp = async function * (iter, fn, parallelism = 1) {
+  const running = new Set()
+  const results = []
+  const _run = (value) => {
+    const promise = fn(value)
+    promise.then(val => {
+      results.push(val)
       running.delete(promise)
     })
     running.add(promise)
-		return promise
+    return promise
   }
   for (let i = 0; i < parallelism; i++) {
-    let { value, done } = iter.next()
+    const { value, done } = iter.next()
     if (!done) _run(value)
   }
   while (running.size) {
-    let ret = await Promise.race(Array.from(running))
-    yield ret
-    let { value, done } = iter.next()
+    await Promise.race(Array.from(running))
+    while (results.length) yield results.shift()
+    const { value, done } = iter.next()
     if (!done) _run(value)
   }
+  while (results.length) yield results.shift()
 }
 
 module.exports = iterp
-

@@ -4,33 +4,34 @@ const iterp = require('./')
 
 test('basic test', async t => {
   let data = [1]
-  let fn = value => sleep(10).then(() => value)
+  const fn = value => sleep(10).then(() => value)
   let count = 0
-  for await (let value of iterp(data.values(), fn)) {
+  for await (const value of iterp(data.values(), fn)) {
     t.same(value, 1)
     count++
   }
   t.same(count, 1)
 
-  data = [1,2,3,4]
+  data = [1, 2, 3, 4]
   count = 0
   let start = Date.now()
-  for await (let value of iterp(data.values(), fn)) {
-    t.same(value, count + 1)
-    count++
+  for await (const value of iterp(data.values(), fn)) {
+    count += value
   }
   t.ok((Date.now() - start) > 40)
-  t.same(count, 4)
+  t.same(count, 10)
 
   count = 0
   start = Date.now()
-  for await (let value of iterp(data.values(), fn, 4)) {
-    t.same(value, count + 1)
-    count++
+
+  for await (const value of iterp(data.values(), fn, 4)) {
+    count += value
   }
-  let tt = Date.now() - start
-  t.ok(tt < 20 && tt > 9)
-  for await (let value of iterp([].values(), fn)) {
-    throw new Error('Got iteration when one should not have occured.')
+  t.same(count, 10)
+  const tt = Date.now() - start
+  console.error({ tt })
+  t.ok(tt < 30 && tt > 9)
+  for await (const value of iterp([].values(), fn)) {
+    throw new Error(`Iteration when one should not have occured. value: ${value}`)
   }
 })

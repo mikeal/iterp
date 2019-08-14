@@ -1,17 +1,26 @@
 {
   "name": "iterp",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.0-dev",
+  "description": "Async generator that allows you to control parallelism.",
   "main": "index.js",
   "scripts": {
     "test": "tap test.js --100"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "http-server": "^0.11.1",
     "sleep-promise": "^8.0.1",
+    "standard": "^13.1.0",
     "tap": "^12.4.0"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikeal/iterp.git"
+  },
+  "keywords": [],
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (https://www.mikealrogers.com/)",
+  "license": "(Apache-2.0 AND MIT)",
+  "bugs": {
+    "url": "https://github.com/mikeal/iterp/issues"
+  },
+  "homepage": "https://github.com/mikeal/iterp#readme"
 }
