@@ -1,3 +1,5 @@
+# `iterp`
+
 ```javascript
 const iterp = require('iterp')
 
