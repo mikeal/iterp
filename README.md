@@ -1,5 +1,7 @@
 # `iterp`
 
+![1267](https://img.shields.io/badge/compiled%20bundle-1k-brightgreen) ![612](https://img.shields.io/badge/gzipped%20bundle-1k-brightgreen)
+
 ```javascript
 const iterp = require('iterp')
 
